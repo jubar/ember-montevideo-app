@@ -17,6 +17,20 @@ module.exports = function(environment) {
       }
     },
 
+    moment: {
+      // To cherry-pick specific locale support into your application.
+      // Full list of locales: https://github.com/moment/moment/tree/2.10.3/locale
+      includeLocales: ['es']
+    },
+
+    googleFonts: ['Share+Tech+Mono', 'Roboto'],
+
+    // Set or update content security policies
+    contentSecurityPolicy: {
+      'font-src': "'self' fonts.gstatic.com",
+      'style-src': "'self' fonts.googleapis.com"
+    },
+
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created

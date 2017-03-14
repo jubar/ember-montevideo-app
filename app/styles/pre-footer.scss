@@ -1,0 +1,31 @@
+.pre-footer {
+  background-color: $orange;
+  color: $font-dark;
+  display: flex;
+  flex-direction: column;
+
+  a {
+    color: $font-light;
+    text-decoration: underline;
+
+    &:hover {
+      cursor: pointer;
+      text-decoration: none;
+    }
+  }
+
+  &--item {
+    flex: 1;
+    padding: 20px;
+
+    &__light {
+      background-color: $orange-light;
+    }
+  }
+}
+
+@media(min-width: 768px) {
+  .pre-footer {
+    flex-direction: row;
+  }
+}

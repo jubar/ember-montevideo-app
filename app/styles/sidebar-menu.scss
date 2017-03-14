@@ -1,0 +1,110 @@
+.bm-menu {
+  background-color: $menu-bg;
+  color: $menu-primary-color;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  a {
+    color: $menu-link-color;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+      cursor: pointer;
+      color: $menu-link-hover-color;
+    }
+  }
+
+  .bm-menu--close {
+    margin-top: 10px;
+    margin-right: 10px;
+    align-self: flex-end;
+    color: rgba(255,255,255,.8);
+
+    &:hover {
+      color: rgba(255,255,255,1);
+      cursor: pointer;
+    }
+  }
+
+  h3 {
+    font-size: 30px;
+    font-weight: bold;
+    color: $menu-title-color;
+    padding: 10px;
+    margin-bottom: 0;
+    background-color: rgba(0,0,0,.1);
+    text-align: center;
+  }
+
+  ul {
+    flex: 1;
+    overflow-y: auto;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: rgba(0,0,0,.1);
+    text-align: center;
+  }
+
+  .bm-menu-item {
+    a {
+      font-size: 18px;
+      display: block;
+      padding: 6px 10px;
+      text-transform: uppercase;
+      text-shadow: 1px 2px 1px rgba(0,0,0,.2);
+
+      &:hover {
+        background-color: rgba(0,0,0,.3);
+      }
+
+      &.active {
+        background-color: rgba(0,0,0,.3);
+        border-left: solid 4px $orange;
+        border-right: solid 4px $orange;
+      }
+    }
+  }
+}
+
+.ember-burger-menu .bm-outlet .bm-content {
+  background-color: #fffbfb;
+}
+
+.sidebar-menu-logo {
+  text-align: center;
+
+  &--image {
+    width: 180px;
+    margin: 0 auto;
+    padding-left: 30px;
+  }
+
+  &--title {
+    font-family: 'Share Tech Mono', monospace;
+    margin-top: 10px;
+  }
+}
+
+.last-activity {
+  text-align: center;
+  margin: 15px 0;
+
+  &--meetup-logo {
+    display: inline-block;
+    margin: 0 auto;
+    font-size: 65px;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  span {
+    margin-top: 2px;
+    margin-bottom: 4px;
+    display: block;
+  }
+}

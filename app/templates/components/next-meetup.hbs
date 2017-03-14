@@ -1,0 +1,10 @@
+{{#if isLoading}}
+  <span>Obteniendo proximo meetup...</span>
+{{else}}
+  <span style="display: block;">
+  Proximo meetup, {{moment-format nextMeetup.when 'dddd DD MMMM HH:mm A'}}
+  </span>
+  <span style="display: block;">
+    En {{nextMeetup.where}}, {{nextMeetup.city}}, {{nextMeetup.country}}
+  </span>
+{{/if}}

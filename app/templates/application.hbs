@@ -1,0 +1,58 @@
+{{#burger-menu animation="slide" itemAnimation="stack" as |burger|}}
+  {{#burger.menu itemTagName="li" as |menu|}}
+    {{fa-icon
+      "close"
+      class="bm-menu--close"
+      click=(action burger.state.actions.close)
+      title="Cerrar menu"
+    }}
+
+    {{sidebar-logo}}
+
+    <h3>2017</h3>
+    <ul>
+      {{#each model as |menuItem|}}
+        {{#menu.item}}
+          {{link-to
+            (moment-format menuItem.name 'MMMM')
+            "meetup"
+            menuItem.name
+          }}
+        {{/menu.item}}
+      {{/each}}
+    </ul>
+
+    {{last-activity-info}}
+  {{/burger.menu}}
+
+  {{#burger.outlet}}
+    {{nav-bar openMenu=burger.state.actions.toggle}}
+
+    {{outlet}}
+
+    <div class="container-fluid">
+      <div class="row pre-footer">
+        <div class="col-xs-12 col-sm-4 pre-footer--item">
+          <h4>MEETUP</h4>
+          <a href="http://meetup.com/ember-montevideo/">Página en meetup.com</a> donde puedes ver las próximas reuniones.
+        </div>
+        <div class="col-xs-12 col-sm-4 pre-footer--item pre-footer--item__light">
+          <h4>GITHUB</h4>
+          <a href="https://github.com/ember-montevideo">Organización de Github</a> donde puedes encontrar los repos de las notas, el sitio y código de los workshops (entre otras cosas).
+        </div>
+        <div class="col-xs-12 col-sm-4 pre-footer--item">
+          <h4>SLACK</h4>
+          <a href="http://owu.slack.com/">Nuestra comunidad en slack</a>, puedes encontrarnos en el canal #meetup-ember. Para registrarte puedes ingresar a <a href="http://owu.herokuapp.com/">owu.herokuapp.com</a>. Para los curiosos OWU == Open Web Uruguay
+        </div>
+      </div>
+
+      <div class="row footer">
+        <footer>
+          <div class="col-xs-12">
+            Ember montevideo meetup
+          </div>
+        </footer>
+      </div>
+    </div>
+  {{/burger.outlet}}
+{{/burger-menu}}

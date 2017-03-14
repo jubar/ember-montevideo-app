@@ -1,0 +1,41 @@
+.main-banner {
+  color: #fff;
+  margin-top: -20px; // Reset navbar
+  height: 400px;
+  position: relative;
+  background: linear-gradient(to bottom, rgba(0,0,0,.8) 0%, rgba(0,0,0,.95) 100%), url('https://c2.staticflickr.com/8/7193/6979664581_29556a25f5_b.jpg');
+  background-size: cover;
+  background-position: bottom center;
+
+  h1, h2, .fa {
+    text-shadow: 0 0 2px rgba(0,0,0,.7);
+  }
+
+  h1, h2 {
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  h1 {
+    font-size: 50px;
+    line-height: 1.3;
+  }
+
+  h2 {
+    font-size: 35px;
+    color: $orange;
+  }
+
+  .fa {
+    margin: 10px 0;
+    font-size: 90px;
+    color: $orange;
+  }
+
+  .center-message {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
