@@ -101,6 +101,11 @@ export default Service.extend({
     });
   },
 
+  /*
+  Gets information about last ember meetup using meetup API.
+
+  If not last meetup, returns null.
+  */
   getLastMeetup() {
     return new RSVP.Promise((resolve, reject) => {
       if (!isNone(this.get('lastMeetup'))) {
