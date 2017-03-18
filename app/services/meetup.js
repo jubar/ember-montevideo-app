@@ -70,9 +70,7 @@ export default Service.extend({
       }).done((event) => {
         run(() => {
           if (event.data && event.data[0]) {
-
             let eventData = event.data[0];
-            console.warn('>>>>>> next meetup', eventData);
             let nextMeetup = MeetupEvent.create({
               meetupId: eventData.id,
               name: eventData.name,
@@ -120,5 +118,11 @@ export default Service.extend({
         reject(error);
       });
     });
+  },
+
+  init() {
+    this._super(...arguments);
+
+    this.getNextMeetup();
   }
 });

@@ -1,0 +1,10 @@
+<div class="center-message text-center">
+  <img src="{{logoUrl}}" />
+  <h1>{{title}}</h1>
+  <h2>{{subTitle}}</h2>
+  <p>
+  {{#if nextMeetup}}
+    {{moment-format nextMeetup.when 'dddd DD MMMM HH:mm'}} en {{nextMeetup.where}}
+  {{/if}}
+  </p>
+</div>
