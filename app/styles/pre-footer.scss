@@ -1,5 +1,5 @@
 .pre-footer {
-  background-color: $orange;
+  background-color: $primary-color;
   color: $font-dark;
   display: flex;
   flex-direction: column;
@@ -19,7 +19,7 @@
     padding: 20px;
 
     &__light {
-      background-color: $orange-light;
+      background-color: $primary-color-light;
     }
   }
 }

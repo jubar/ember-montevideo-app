@@ -1,7 +1,10 @@
 import Ember from 'ember';
 
-const { Component } = Ember;
+const { Component, inject: { service }, computed } = Ember;
 
 export default Component.extend({
-  classNames: ['last-activity']
+  meetup: service(),
+  classNames: ['last-activity'],
+
+  lastMeetup: computed.alias('meetup.lastMeetup')
 });

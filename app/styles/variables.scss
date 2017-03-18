@@ -1,14 +1,14 @@
 $font-light: #fff;
 $font-dark: #222;
 
-$gray: #252525;
-$gray-light: #dcdcdc;
+$secondary-color: #252525;
+$secondary-color-light: #dcdcdc;
 
-$orange: #e24c32;
-$orange-light: #dc6a57;
+$primary-color: #e24c32;
+$primary-color-light: #dc6a57;
 
-$menu-bg: $gray;
+$menu-bg: $secondary-color;
 $menu-primary-color: $font-light;
-$menu-link-color: $orange;
-$menu-link-hover-color: $orange-light;
+$menu-link-color: $primary-color;
+$menu-link-hover-color: $primary-color-light;
 $menu-title-color: rgba(255,255,255,.1);

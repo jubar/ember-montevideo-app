@@ -6,6 +6,7 @@ const { Service, RSVP, run, isNone } = Ember;
 
 export default Service.extend({
   nextMeetup: null,
+  lastMeetup: null,
 
   /*
   Gets all the markdown files under meetups directory in github.
@@ -100,6 +101,51 @@ export default Service.extend({
     });
   },
 
+  getLastMeetup() {
+    return new RSVP.Promise((resolve, reject) => {
+      if (!isNone(this.get('lastMeetup'))) {
+        resolve(this.get('lastMeetup'));
+      }
+
+      let url = 'https://api.meetup.com/ember-montevideo/events?&sign=false&photo-host=public&page=1&scroll=recent_past&status=past';
+
+      Ember.$.ajax({
+        url,
+        jsonp: "callback",
+        dataType: "jsonp"
+      }).done((event) => {
+        run(() => {
+          if (event.data && event.data[0]) {
+            let eventData = event.data[0];
+            let nextMeetup = MeetupEvent.create({
+              meetupId: eventData.id,
+              name: eventData.name,
+              description: eventData.description,
+              duration: eventData.duration,
+              link: eventData.link,
+              when: new Date(eventData.time),
+              where: eventData.venue.name,
+              city: eventData.venue.city,
+              country: eventData.venue.country,
+              rsvpLimit: eventData.rsvp_limit,
+              yesRsvpCount: eventData.yes_rsvp_count,
+              waitlistCount: eventData.waitlist_count
+            });
+
+            this.set('lastMeetup', nextMeetup);
+          } else {
+            this.set('lastMeetup', null);
+          }
+
+          resolve(this.get('lastMeetup'));
+        });
+      }).fail((error) => {
+        console.error('ERROR: ', error);
+        reject(error);
+      });
+    });
+  },
+
   /*
   This method returns a markdown file located under meetups directories in github.
 
@@ -124,5 +170,6 @@ export default Service.extend({
     this._super(...arguments);
 
     this.getNextMeetup();
+    this.getLastMeetup();
   }
 });

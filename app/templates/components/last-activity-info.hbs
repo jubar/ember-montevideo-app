@@ -1,7 +1,5 @@
 <a href="http://meetup.com/ember-montevideo/" target="_blank" class="last-activity--meetup-logo">
   {{fa-icon "meetup" aria-hidden="true" title="Ember montevideo meetup"}}
 </a>
-<span>Ultimo meetup, Marzo 2017</span>
-<a href="www.ingsw.com/" target="_blank">
-  <i class="fa fa-external-link" aria-hidden="true"></i> Ingenious softworks
-</a>
+<span>Ultimo meetup, {{moment-format lastMeetup.when "MMMM YYYY"}}</span>
+<span class="where">{{lastMeetup.where}}</span>
