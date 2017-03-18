@@ -9,18 +9,23 @@
 
     {{sidebar-logo}}
 
-    <h3>2017</h3>
-    <ul>
-      {{#each model as |menuItem|}}
-        {{#menu.item}}
-          {{link-to
-            (moment-format menuItem.name 'MMMM')
-            "meetup"
-            menuItem.name
-          }}
-        {{/menu.item}}
-      {{/each}}
-    </ul>
+    {{#meetup-menu-selector as |items isLoading|}}
+      {{#if isLoading}}
+        {{fa-icon "circle-o-notch" spin=true}}
+      {{else}}
+        <ul>
+          {{#each items as |menuItem|}}
+            {{#menu.item}}
+              {{link-to
+                (moment-format menuItem.name 'MMMM')
+                "meetup"
+                menuItem.name
+              }}
+            {{/menu.item}}
+          {{/each}}
+        </ul>
+      {{/if}}
+    {{/meetup-menu-selector}}
 
     {{last-activity-info}}
   {{/burger.menu}}

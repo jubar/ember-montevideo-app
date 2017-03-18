@@ -5,6 +5,7 @@ import MeetupEvent from '../models/meetup';
 const { Service, RSVP, run, isNone } = Ember;
 
 export default Service.extend({
+  yearsMenu: Ember.A(),
   nextMeetup: null,
   lastMeetup: null,
 
@@ -32,6 +33,14 @@ export default Service.extend({
               });
 
               menues.pushObject(menu);
+            }
+          });
+
+          menues.forEach((menu) => {
+            let year = menu.get('name').substring(0, 4);
+
+            if (!this.get('yearsMenu').includes(year)) {
+              this.get('yearsMenu').push(year);
             }
           });
 
