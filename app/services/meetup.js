@@ -5,9 +5,23 @@ import MeetupEvent from '../models/meetup';
 const { Service, RSVP, run, isNone } = Ember;
 
 export default Service.extend({
+  allMenus: Ember.A(),
   yearsMenu: Ember.A(),
   nextMeetup: null,
   lastMeetup: null,
+
+  _generateYearsMenu() {
+    let years = [];
+    this.get('allMenus').forEach((menu) => {
+      let year = menu.get('name').substring(0,4);
+
+      if (!years.includes(year)) {
+        years.push(year);
+      }
+    });
+
+    this.set('yearsMenu', years.reverse());
+  },
 
   /*
   Gets all the markdown files under meetups directory in github.
@@ -15,15 +29,27 @@ export default Service.extend({
 
   Convention assumed for the name of the files is: yyyy-mm.md
   */
-  getMenues(filter = 'all') {
-    let url = `https://api.github.com/repos/jubar/ember-montevideo.github.io/contents/meetups`;
-
+  getMenus(filter = 'all') {
     return new RSVP.Promise((resolve, reject) => {
+      if (this.get('allMenus.length') > 0) {
+        this._generateYearsMenu();
+
+        if (filter === 'all') {
+          return resolve(this.get('allMenus').reverse());
+        } else {
+          let filteredMenus = this.get('allMenus').filter((item) => {
+            return item.get('name').startsWith(filter);
+          });
+          return resolve(filteredMenus);
+        }
+      }
+
+      let url = `https://api.github.com/repos/jubar/ember-montevideo.github.io/contents/meetups`;
+
       Ember.$.ajax({
         url
       }).done((data) => {
         run(() => {
-          let menues = Ember.A();
           data.forEach((content) => {
             if (content.name) {
               let menu = MeetupMenu.create({
@@ -31,26 +57,19 @@ export default Service.extend({
                 path: content.path,
                 url: content.url
               });
-
-              menues.pushObject(menu);
+              this.get('allMenus').pushObject(menu);
             }
           });
 
-          menues.forEach((menu) => {
-            let year = menu.get('name').substring(0, 4);
-
-            if (!this.get('yearsMenu').includes(year)) {
-              this.get('yearsMenu').push(year);
-            }
-          });
+          this._generateYearsMenu();
 
           if (filter === 'all') {
-            resolve(menues.reverse());
+            resolve(this.get('allMenus'));
           } else {
-            let filteredMenues = menues.filter((item) => {
+            let filteredMenus = this.get('allMenus').filter((item) => {
               return item.get('name').startsWith(filter);
             });
-            resolve(filteredMenues.reverse());
+            resolve(filteredMenus);
           }
         });
       }).fail((error) => {
@@ -68,7 +87,7 @@ export default Service.extend({
   getNextMeetup() {
     return new RSVP.Promise((resolve, reject) => {
       if (!isNone(this.get('nextMeetup'))) {
-        resolve(this.get('nextMeetup'));
+        return resolve(this.get('nextMeetup'));
       }
 
       let url = 'https://api.meetup.com/ember-montevideo/events?&sign=false&photo-host=public&page=1';
@@ -118,7 +137,7 @@ export default Service.extend({
   getLastMeetup() {
     return new RSVP.Promise((resolve, reject) => {
       if (!isNone(this.get('lastMeetup'))) {
-        resolve(this.get('lastMeetup'));
+        return resolve(this.get('lastMeetup'));
       }
 
       let url = 'https://api.meetup.com/ember-montevideo/events?&sign=false&photo-host=public&page=1&scroll=recent_past&status=past';

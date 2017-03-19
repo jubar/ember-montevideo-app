@@ -13,8 +13,8 @@ export default Component.extend({
   init() {
     this._super(...arguments);
 
-    this.set('currentYear', this.get('years.lastObject'));
-    this.get('meetup').getMenues(this.get('currentYear')).then((items) => {
+    this.set('currentYear', new Date().getFullYear());
+    this.get('meetup').getMenus(this.get('currentYear')).then((items) => {
       this.set('items', items);
     }).finally(() => {
       this.set('isLoading', false);
@@ -26,7 +26,7 @@ export default Component.extend({
       this.set('isLoading', true);
       this.set('currentYear', year);
 
-      this.get('meetup').getMenues(this.get('currentYear')).then((items) => {
+      this.get('meetup').getMenus(this.get('currentYear')).then((items) => {
         this.set('items', items);
       }).finally(() => {
         this.set('isLoading', false);
