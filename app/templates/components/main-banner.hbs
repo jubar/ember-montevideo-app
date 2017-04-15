@@ -4,7 +4,9 @@
   <h2>{{subTitle}}</h2>
   <p>
   {{#if nextMeetup}}
-    {{moment-format nextMeetup.when 'dddd DD MMMM HH:mm'}} en {{nextMeetup.where}}
+    <a href={{nextMeetup.link}} rel="noreferrer noopener" target="_blank">
+      {{moment-format nextMeetup.when 'dddd DD MMMM HH:mm'}} en {{nextMeetup.where}}
+    </a>
   {{/if}}
   </p>
 </div>
