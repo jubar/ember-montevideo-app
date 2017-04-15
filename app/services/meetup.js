@@ -23,6 +23,27 @@ export default Service.extend({
     this.set('yearsMenu', years.reverse());
   },
 
+  _createMeetupEvent(event) {
+    if (isNone(event)) {
+      return null;
+    }
+
+    return MeetupEvent.create({
+      meetupId: event.id,
+      name: event.name,
+      description: event.description,
+      duration: event.duration,
+      link: event.link,
+      when: new Date(event.time),
+      where: event.venue.name,
+      city: event.venue.city,
+      country: event.venue.country,
+      rsvpLimit: event.rsvp_limit,
+      yesRsvpCount: event.yes_rsvp_count,
+      waitlistCount: event.waitlist_count
+    });
+  },
+
   /*
   Gets all the markdown files under meetups directory in github.
   Using these markdowns generate the menu items according with the filter.
@@ -98,29 +119,13 @@ export default Service.extend({
         dataType: "jsonp"
       }).done((event) => {
         run(() => {
+          let nextMeetup = null;
           if (event.data && event.data[0]) {
-            let eventData = event.data[0];
-            let nextMeetup = MeetupEvent.create({
-              meetupId: eventData.id,
-              name: eventData.name,
-              description: eventData.description,
-              duration: eventData.duration,
-              link: eventData.link,
-              when: new Date(eventData.time),
-              where: eventData.venue.name,
-              city: eventData.venue.city,
-              country: eventData.venue.country,
-              rsvpLimit: eventData.rsvp_limit,
-              yesRsvpCount: eventData.yes_rsvp_count,
-              waitlistCount: eventData.waitlist_count
-            });
-
-            this.set('nextMeetup', nextMeetup);
-          } else {
-            this.set('nextMeetup', null);
+            nextMeetup = this._createMeetupEvent(event.data[0]);
           }
 
-          resolve(this.get('nextMeetup'));
+          this.set('nextMeetup', nextMeetup);
+          resolve(nextMeetup);
         });
       }).fail((error) => {
         console.error('ERROR: ', error);
@@ -148,29 +153,13 @@ export default Service.extend({
         dataType: "jsonp"
       }).done((event) => {
         run(() => {
+          let lastMeetup = null;
           if (event.data && event.data[0]) {
-            let eventData = event.data[0];
-            let nextMeetup = MeetupEvent.create({
-              meetupId: eventData.id,
-              name: eventData.name,
-              description: eventData.description,
-              duration: eventData.duration,
-              link: eventData.link,
-              when: new Date(eventData.time),
-              where: eventData.venue.name,
-              city: eventData.venue.city,
-              country: eventData.venue.country,
-              rsvpLimit: eventData.rsvp_limit,
-              yesRsvpCount: eventData.yes_rsvp_count,
-              waitlistCount: eventData.waitlist_count
-            });
-
-            this.set('lastMeetup', nextMeetup);
-          } else {
-            this.set('lastMeetup', null);
+            lastMeetup = this._createMeetupEvent(event.data[0]);
           }
 
-          resolve(this.get('lastMeetup'));
+          this.set('lastMeetup', lastMeetup);
+          resolve(lastMeetup);
         });
       }).fail((error) => {
         console.error('ERROR: ', error);
