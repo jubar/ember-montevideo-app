@@ -1,0 +1,49 @@
+.participants {
+  img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin: 0 10px 10px 0px;
+    border: 3px solid rgba(255,255,255,.1);
+    filter: grayscale(100%);
+    transition: all .2s;
+
+    &:hover {
+      filter: grayscale(0%);
+      border: 3px solid $primary-color-light;
+      transition: all .4s;
+    }
+  }
+
+  .new-rsvp {
+    background-color: $primary-color;
+    width: 80px;
+    height: 80px;
+    margin: 0 10px 10px 0px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $primary-color-light;
+    }
+
+    a, a:hover {
+      color: $font-light;
+      text-decoration: none;
+    }
+
+    i {
+      font-size: 32px;
+      margin-top: 11px;
+    }
+
+    span {
+      display: block;
+      margin-top: 2px;
+      font-size: 14px;
+      font-family: 'Share Tech Mono', monospace;
+    };
+  }
+}

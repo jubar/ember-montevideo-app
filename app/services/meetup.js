@@ -9,6 +9,7 @@ export default Service.extend({
   yearsMenu: Ember.A(),
   nextMeetup: null,
   lastMeetup: null,
+  nextMeetupParticipants: null,
 
   _generateYearsMenu() {
     let years = [];
@@ -160,6 +161,30 @@ export default Service.extend({
 
           this.set('lastMeetup', lastMeetup);
           resolve(lastMeetup);
+        });
+      }).fail((error) => {
+        console.error('ERROR: ', error);
+        reject(error);
+      });
+    });
+  },
+
+  getRSVP(meetupId) {
+    return new RSVP.Promise((resolve, reject) => {
+      if (!isNone(this.get('nextMeetupParticipants'))) {
+        return resolve(this.get('nextMeetupParticipants'));
+      }
+
+      let url = `https://api.meetup.com/ember-montevideo/events/${meetupId}/rsvps`;
+
+      Ember.$.ajax({
+        url,
+        jsonp: "callback",
+        dataType: "jsonp"
+      }).done((participants) => {
+        run(() => {
+          this.set('nextMeetupParticipants', participants);
+          resolve(participants);
         });
       }).fail((error) => {
         console.error('ERROR: ', error);

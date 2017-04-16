@@ -1,0 +1,15 @@
+{{#if isLoading}}
+  <p>Obteniendo participantes del próximo meetup...</p>
+{{else}}
+  {{#each participants as |participant|}}
+    <img src="{{participant.photo.thumb_link}}"
+      alt="{{participant.name}}"
+      title="{{participant.name}}">
+  {{/each}}
+  <div class="new-rsvp">
+    <a href="http://meetup.com/ember-montevideo/">
+      <i class="fa fa-user-plus" aria-hidden="true"></i>
+      <span>SUMATE</span>
+    </a>
+  </div>
+{{/if}}
