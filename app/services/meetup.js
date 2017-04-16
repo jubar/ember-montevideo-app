@@ -193,6 +193,25 @@ export default Service.extend({
     });
   },
 
+  getPhotos(meetupId) {
+    return new RSVP.Promise((resolve, reject) => {
+      let url = `https://api.meetup.com/ember-montevideo/events/${meetupId}/photos`;
+
+      Ember.$.ajax({
+        url,
+        jsonp: "callback",
+        dataType: "jsonp"
+      }).done((photos) => {
+        run(() => {
+          resolve(photos);
+        });
+      }).fail((error) => {
+        console.error('ERROR: ', error);
+        reject(error);
+      });
+    });
+  },
+
   /*
   This method returns a markdown file located under meetups directories in github.
 

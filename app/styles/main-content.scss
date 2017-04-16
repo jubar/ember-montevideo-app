@@ -1,4 +1,6 @@
 .main-content {
+  padding-bottom: 25px;
+
   a {
     color: $menu-link-color;
     text-decoration: none;
@@ -22,5 +24,9 @@
       font-size: 16px;
       padding: 5px 0;
     }
+  }
+
+  img {
+    max-width: 100%;
   }
 }
