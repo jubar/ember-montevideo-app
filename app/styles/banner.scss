@@ -25,6 +25,16 @@
     line-height: 2.3;
   }
 
+  a {
+    color: $primary-color;
+
+    &:hover {
+      text-decoration: none;
+      cursor: pointer;
+      color: $menu-link-hover-color;
+    }
+  }
+
   .fa {
     margin: 10px 0;
     font-size: 90px;

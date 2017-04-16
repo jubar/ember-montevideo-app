@@ -1,12 +1,13 @@
 .pre-footer {
   background-color: $primary-color;
-  color: $font-dark;
+  color: $font-light;
   display: flex;
   flex-direction: column;
 
   a {
     color: $font-light;
     text-decoration: underline;
+    padding: 2px 5px;
 
     &:hover {
       cursor: pointer;
@@ -17,9 +18,21 @@
   &--item {
     flex: 1;
     padding: 20px;
+    text-align: center;
 
     &__light {
       background-color: $primary-color-light;
+    }
+
+    i {
+      display: block;
+      font-size: 58px;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    p {
+      line-height: 1.6;
     }
   }
 }
