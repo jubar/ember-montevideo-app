@@ -1,0 +1,51 @@
+<footer>
+  <div class="col-xs-12 col-sm-5">
+    <span class="title">Ember montevideo meetup</span>
+
+    <p>
+      Estamos muy orgullosos de formar parte de la gran comunidad de
+      <a href="http://js.uy/">JavaScript del Uruguay</a> y te invitamos a sumarte
+      y formar parte de las reuniones mensuales de Ember.
+    </p>
+
+    {{#if nextMeetup}}
+      <p>
+        Ya podes agendarte para nuestra proxima juntada mensual el&nbsp;
+        <a href={{nextMeetup.link}} rel="noreferrer noopener" target="_blank">
+          {{moment-format nextMeetup.when 'dddd DD MMMM HH:mm'}} en {{nextMeetup.where}}
+        </a>
+      </p>
+    {{/if}}
+
+    <ul class="social-links">
+      <li>
+        <a href="http://meetup.com/ember-montevideo/">
+          <i class="fa fa-meetup" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://owu.slack.com/messages/C45ERN1JA/">
+          <i class="fa fa-slack" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/ember-montevideo">
+          <i class="fa fa-github" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li>
+        <a href="http://twitter.com/embermontevideo/">
+          <i class="fa fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-xs-12 col-sm-7">
+
+  </div>
+
+  <div class="col-xs-12 made-with-love">
+    Built using Ember with <i class="fa fa-heart" aria-hidden="true"></i> for Embereños
+  </div>
+</footer>

@@ -1,6 +1,66 @@
 .footer {
   background-color: $secondary-color;
   color: $font-light;
-  padding: 15px;
-  bottom: 10px;
+  padding: 30px 15px 10px 15px;
+
+  .title {
+    display: block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 25px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: darken($font-light, 20%);
+
+    a {
+      text-decoration: none;
+      cursor: pointer;
+      color: $primary-color-light;
+
+      &:hover {
+        color: $primary-color-light;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .social-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-top: 20px;
+
+    li {
+      display: inline-block;
+      font-size: 25px;
+      background-color: rgba(255,255,255,.1);
+      width: 45px;
+      height: 45px;
+      line-height: 45px;
+      text-align: center;
+      margin-right: 10px;
+      transition: all .3s;
+
+      a, a:hover {
+        color: $font-light;
+        text-decoration: none;
+      }
+
+      &:hover {
+        background-color: $primary-color;
+        cursor: pointer;
+        transition: all .3s;
+      }
+    }
+  }
+
+  .made-with-love {
+    text-align: center;
+    border-top: 1px solid rgba(220, 106, 87, 0.3);
+    margin-top: 20px;
+    padding-top: 10px;
+    font-size: 12px;
+    color: $primary-color-light;
+  }
 }
