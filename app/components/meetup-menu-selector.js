@@ -1,36 +1,28 @@
 import Ember from 'ember';
+import { task } from 'ember-concurrency';
 
 const { Component, computed, inject: { service } } = Ember;
 
 export default Component.extend({
   meetup: service(),
   classNames: ['meetup-menu-selector'],
-  currentYear: null,
+
   years: computed.alias('meetup.yearsMenu'),
-  items: [],
-  isLoading: true,
 
-  init() {
-    this._super(...arguments);
+  retrieveMeetupsTask: task(function * (year = new Date().getFullYear()) {
+    this.set('currentYear', year);
+    this.set('isLoading', true);
+    this.set('items', (yield this.get('meetup').getMenus(year)).reverse());
+    this.set('isLoading', false);
+  }).on('init'),
 
-    this.set('currentYear', new Date().getFullYear());
-    this.get('meetup').getMenus(this.get('currentYear')).then((items) => {
-      this.set('items', items);
-    }).finally(() => {
-      this.set('isLoading', false);
-    });
-  },
+  items: computed(function() {
+    return [];
+  }),
 
   actions: {
     changeMenu(year) {
-      this.set('isLoading', true);
-      this.set('currentYear', year);
-
-      this.get('meetup').getMenus(this.get('currentYear')).then((items) => {
-        this.set('items', items);
-      }).finally(() => {
-        this.set('isLoading', false);
-      });
+      this.get('retrieveMeetupsTask').perform(year);
     }
   }
 });

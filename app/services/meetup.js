@@ -1,28 +1,29 @@
 import Ember from 'ember';
 import MeetupMenu from '../models/meetup-menu';
 import MeetupEvent from '../models/meetup';
+import ENV from 'ember-montevideo-website/config/environment';
 
-const { Service, RSVP, run, isNone } = Ember;
+const { computed, Service, RSVP, run, isNone } = Ember;
 
 export default Service.extend({
-  allMenus: Ember.A(),
-  yearsMenu: Ember.A(),
+  allMenus: computed(function() {
+    return [];
+  }),
   nextMeetup: null,
   lastMeetup: null,
   nextMeetupParticipants: null,
 
-  _generateYearsMenu() {
-    let years = [];
-    this.get('allMenus').forEach((menu) => {
-      let year = menu.get('name').substring(0,4);
+  yearsMenu: computed('allMenus.[]', function() {
+    return this.get('allMenus')
+      .map((menu) => menu.get('name').substring(0,4))
+      .reduceRight((years, current) => {
+        if (!years.includes(current)) {
+          years.push(current);
+        }
 
-      if (!years.includes(year)) {
-        years.push(year);
-      }
-    });
-
-    this.set('yearsMenu', years.reverse());
-  },
+        return years;
+      }, []);
+  }),
 
   _createMeetupEvent(event) {
     if (isNone(event)) {
@@ -45,17 +46,17 @@ export default Service.extend({
     });
   },
 
-  /*
-  Gets all the markdown files under meetups directory in github.
-  Using these markdowns generate the menu items according with the filter.
-
-  Convention assumed for the name of the files is: yyyy-mm.md
-  */
+  /**
+   * Generates menu items by fetching all markdown files from a Github repository.
+   *
+   * File name format should have this format yyyy-mm.md
+   *
+   * @param filter {String} - filter items by text
+   * @return {Promise}
+   */
   getMenus(filter = 'all') {
     return new RSVP.Promise((resolve, reject) => {
       if (this.get('allMenus.length') > 0) {
-        this._generateYearsMenu();
-
         if (filter === 'all') {
           return resolve(this.get('allMenus').reverse());
         } else {
@@ -66,11 +67,8 @@ export default Service.extend({
         }
       }
 
-      let url = `https://api.github.com/repos/ember-montevideo/meetups/contents`;
-
-      Ember.$.ajax({
-        url
-      }).done((data) => {
+      Ember.$.ajax({ url: ENV.API.githubMarkdowns })
+        .done((data) => {
         run(() => {
           data.filterBy('type', 'dir').forEach((content) => {
             if (content.name) {
@@ -82,8 +80,6 @@ export default Service.extend({
               this.get('allMenus').pushObject(menu);
             }
           });
-
-          this._generateYearsMenu();
 
           if (filter === 'all') {
             resolve(this.get('allMenus'));
@@ -112,10 +108,8 @@ export default Service.extend({
         return resolve(this.get('nextMeetup'));
       }
 
-      let url = 'https://api.meetup.com/ember-montevideo/events?&sign=false&photo-host=public&page=1';
-
       Ember.$.ajax({
-        url,
+        url: ENV.API.meetupEvents,
         jsonp: "callback",
         dataType: "jsonp"
       }).done((event) => {
@@ -146,10 +140,8 @@ export default Service.extend({
         return resolve(this.get('lastMeetup'));
       }
 
-      let url = 'https://api.meetup.com/ember-montevideo/events?&sign=false&photo-host=public&page=1&scroll=recent_past&status=past';
-
       Ember.$.ajax({
-        url,
+        url: ENV.API.meetupLastEvent,
         jsonp: "callback",
         dataType: "jsonp"
       }).done((event) => {
@@ -175,10 +167,8 @@ export default Service.extend({
         return resolve(this.get('nextMeetupParticipants'));
       }
 
-      let url = `https://api.meetup.com/ember-montevideo/events/${meetupId}/rsvps`;
-
       Ember.$.ajax({
-        url,
+        url: ENV.API.meetupRSVPs.replace(/%ID/, meetupId),
         jsonp: "callback",
         dataType: "jsonp"
       }).done((participants) => {
@@ -195,10 +185,8 @@ export default Service.extend({
 
   getPhotos(meetupId) {
     return new RSVP.Promise((resolve, reject) => {
-      let url = `https://api.meetup.com/ember-montevideo/events/${meetupId}/photos`;
-
       Ember.$.ajax({
-        url,
+        url: ENV.API.meetupPhotos.replace(/%ID/, meetupId),
         jsonp: "callback",
         dataType: "jsonp"
       }).done((photos) => {
@@ -218,12 +206,12 @@ export default Service.extend({
   This method assume the file is a markdown and the directory is meetups.
   */
   getMeetupInfo(slug) {
-    let url = `https://raw.githubusercontent.com/ember-montevideo/meetups/master/${slug}/README.md`;
-
     return new Ember.RSVP.Promise((resolve, reject) => {
       Ember.$.ajax({
-        url
+        url: ENV.API.githubMarkdown.replace(/%SLUG/, slug)
       }).done((data) => {
+        // FIXME: This is a quick hack to fix the URL of the images
+        data = data.replace(/\.\/(.+?\.(png|gif|jpg))/g, `https://raw.githubusercontent.com/ember-montevideo/meetups/master/${slug}/$1`);
         resolve(data);
       }).fail((error) => {
         console.error('ERROR: ', error);
