@@ -66,13 +66,13 @@ export default Service.extend({
         }
       }
 
-      let url = `https://api.github.com/repos/jubar/ember-montevideo.github.io/contents/meetups`;
+      let url = `https://api.github.com/repos/ember-montevideo/meetups/contents`;
 
       Ember.$.ajax({
         url
       }).done((data) => {
         run(() => {
-          data.forEach((content) => {
+          data.filterBy('type', 'dir').forEach((content) => {
             if (content.name) {
               let menu = MeetupMenu.create({
                 name: content.name.split('.')[0], // Remove the extension of the file
@@ -218,7 +218,7 @@ export default Service.extend({
   This method assume the file is a markdown and the directory is meetups.
   */
   getMeetupInfo(slug) {
-    let url = `https://raw.githubusercontent.com/jubar/ember-montevideo.github.io/master/meetups/${slug}.md`;
+    let url = `https://raw.githubusercontent.com/ember-montevideo/meetups/master/${slug}/README.md`;
 
     return new Ember.RSVP.Promise((resolve, reject) => {
       Ember.$.ajax({
