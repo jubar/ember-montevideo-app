@@ -34,6 +34,15 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+    },
+
+    API: {
+      githubMarkdowns: 'https://api.github.com/repos/ember-montevideo/meetups/contents',
+      githubMarkdown: 'https://raw.githubusercontent.com/ember-montevideo/meetups/master/%SLUG/README.md',
+      meetupEvents: 'https://api.meetup.com/ember-montevideo/events?&sign=false&photo-host=public&page=1',
+      meetupLastEvent: 'https://api.meetup.com/ember-montevideo/events?&sign=false&photo-host=public&page=1&scroll=recent_past&status=past',
+      meetupRSVPs: 'https://api.meetup.com/ember-montevideo/events/%ID/rsvps',
+      meetupPhotos: 'https://api.meetup.com/ember-montevideo/events/%ID/photos'
     }
   };
 
