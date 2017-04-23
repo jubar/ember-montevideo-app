@@ -2,7 +2,7 @@
   <p>Obteniendo participantes del próximo meetup...</p>
 {{else}}
   {{#each participants as |participant|}}
-    <img src="{{participant.photo.thumb_link}}"
+    <img src="{{participant.imageUrl}}"
       alt="{{participant.name}}"
       title="{{participant.name}}">
   {{/each}}

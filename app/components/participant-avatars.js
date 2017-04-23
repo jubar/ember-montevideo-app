@@ -1,31 +1,38 @@
 import Ember from 'ember';
+import { task } from 'ember-concurrency';
 
-const { Component, inject: { service }, isNone } = Ember;
+const { Component, inject: { service }, isNone, computed } = Ember;
 
 export default Component.extend({
-  classNames: ['participants'],
   meetup: service(),
-  isLoading: true,
-  participants: [],
+  classNames: ['participants'],
+  participants: computed(function() {
+    return [];
+  }),
 
-  init() {
-    this._super(...arguments);
-
-    this.get('meetup').getRSVP(this.get('meetupId')).then((result) => {
-      if (!isNone(result)) {
-        let members = [];
+  retrieveParticipants: task(function * () {
+    try {
+      this.set('isLoading', true);
+      let result = yield this.get('meetup').getRSVP(this.get('meetupId'));
+      let members = [];
+      if (result) {
         result.data.forEach((rsvp) => {
           if (!isNone(rsvp.member)) {
+            let imageUrl = 'assets/images/no-avatar.gif';
             let { id, name, photo } = rsvp.member;
-            members.push({ id, name, photo });
+            if (photo && !isNone(photo.thumb_link)) {
+              imageUrl = photo.thumb_link;
+            }
+            members.push({ id, name, imageUrl });
           }
         });
-        this.set('participants', members);
       }
-    }).catch((error) => {
-      console.error('Error', error);
-    }).finally(() => {
+
+      this.set('participants', members);
+    } catch(error) {
+      this.set('participants', []);
+    } finally {
       this.set('isLoading', false);
-    });
-  }
+    }
+  }).on('init')
 });
