@@ -67,6 +67,7 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     ENV.rootURL = "/ember-montevideo-app/";
+    // ENV.rootURL = "/"; // URL for js.uy
   }
 
   return ENV;
