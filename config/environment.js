@@ -13,21 +13,19 @@ module.exports = function(environment) {
       }
     },
 
-    metricsAdapters: [
-      {
-        name: 'GoogleAnalytics',
-        environments: ['development', 'production'],
-        config: {
-          id: 'UA-98694123-1',
-          // Use `analytics_debug.js` in development
-          debug: environment === 'development',
-          // Use verbose tracing of GA events
-          trace: environment === 'development',
-          // Ensure development env hits aren't sent to GA
-          sendHitTask: environment !== 'development'
-        }
+    metricsAdapters: [{
+      name: 'GoogleAnalytics',
+      environments: ['development', 'production'],
+      config: {
+        id: 'UA-98694123-1',
+        // Use `analytics_debug.js` in development
+        debug: environment === 'development',
+        // Use verbose tracing of GA events
+        trace: environment === 'development',
+        // Ensure development env hits aren't sent to GA
+        sendHitTask: environment !== 'development'
       }
-    ],
+    }],
 
     moment: {
       includeLocales: ['es']
@@ -40,8 +38,8 @@ module.exports = function(environment) {
       'default-src': "'none'",
       'font-src': "'self' fonts.gstatic.com",
       'style-src': "'self' fonts.googleapis.com",
-      'script-src': "'self' https://www.google-analytics.com",
-      'connect-src': "'self' https://www.google-analytics.com",
+      'script-src': "'self' https://www.google-analytics.com/*",
+      'connect-src': "'self' https://www.google-analytics.com/*",
       'img-src': "'self'",
       'media-src': "'self'"
     },
