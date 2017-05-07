@@ -7,19 +7,29 @@ module.exports = function(environment) {
     rootURL: '/',
     locationType: 'auto',
     EmberENV: {
-      FEATURES: {
-        // Here you can enable experimental features on an ember canary build
-        // e.g. 'with-controller': true
-      },
+      FEATURES: {},
       EXTEND_PROTOTYPES: {
-        // Prevent Ember Data from overriding Date.parse.
         Date: false
       }
     },
 
+    metricsAdapters: [
+      {
+        name: 'GoogleAnalytics',
+        environments: ['development', 'production'],
+        config: {
+          id: 'UA-98694123-1',
+          // Use `analytics_debug.js` in development
+          debug: environment === 'development',
+          // Use verbose tracing of GA events
+          trace: environment === 'development',
+          // Ensure development env hits aren't sent to GA
+          sendHitTask: environment !== 'development'
+        }
+      }
+    ],
+
     moment: {
-      // To cherry-pick specific locale support into your application.
-      // Full list of locales: https://github.com/moment/moment/tree/2.10.3/locale
       includeLocales: ['es']
     },
 
@@ -27,14 +37,16 @@ module.exports = function(environment) {
 
     // Set or update content security policies
     contentSecurityPolicy: {
+      'default-src': "'none'",
       'font-src': "'self' fonts.gstatic.com",
-      'style-src': "'self' fonts.googleapis.com"
+      'style-src': "'self' fonts.googleapis.com",
+      'script-src': "'self' https://www.google-analytics.com",
+      'connect-src': "'self' https://www.google-analytics.com",
+      'img-src': "'self'",
+      'media-src': "'self'"
     },
 
-    APP: {
-      // Here you can pass flags/options to your application instance
-      // when it is created
-    },
+    APP: {},
 
     API: {
       githubMarkdowns: 'https://api.github.com/repos/ember-montevideo/meetups/contents',
