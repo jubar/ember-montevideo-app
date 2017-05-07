@@ -1,3 +1,4 @@
+/* global moment */
 import Ember from 'ember';
 
 const { Route, inject: { service }, RSVP, String: { capitalize } } = Ember;
