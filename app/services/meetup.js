@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import Ember from 'ember';
 import MeetupMenu from '../models/meetup-menu';
 import MeetupEvent from '../models/meetup';
