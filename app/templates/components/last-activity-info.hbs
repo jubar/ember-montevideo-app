@@ -2,6 +2,6 @@
   {{fa-icon "meetup" aria-hidden="true" title="Ember montevideo meetup"}}
 </a>
 {{#if lastMeetup}}
-  <span>Último meetup, {{moment-format lastMeetup.when "MMMM YYYY"}}</span>
+  <span>Último meetup, <span class="cap">{{moment-format lastMeetup.when "MMMM YYYY"}}</span></span>
   <span class="where">{{lastMeetup.where}}</span>
 {{/if}}

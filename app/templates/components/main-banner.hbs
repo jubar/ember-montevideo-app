@@ -5,7 +5,8 @@
   <p>
   {{#if nextMeetup}}
     <a href={{nextMeetup.link}} rel="noreferrer noopener" target="_blank">
-      {{moment-format nextMeetup.when 'dddd DD MMMM HH:mm'}} en {{nextMeetup.where}}
+      <span class="cap">{{moment-format nextMeetup.when 'dddd D MMMM HH:mm'}}</span>
+      en {{nextMeetup.where}}
     </a>
   {{/if}}
   </p>

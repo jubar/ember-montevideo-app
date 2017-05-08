@@ -4,15 +4,16 @@
 
     <p>
       Estamos muy orgullosos de formar parte de la gran comunidad de
-      <a href="http://js.uy/">JavaScript del Uruguay</a> y te invitamos a sumarte
-      y formar parte de las reuniones mensuales de Ember.
+      <a href="http://js.uy/">JavaScript del Uruguay</a> y te invitamos a que te sumes
+      y formes parte de las reuniones mensuales de Ember.
     </p>
 
     {{#if nextMeetup}}
       <p>
-        Ya podes agendarte para nuestra proxima juntada mensual el&nbsp;
+        Ya puedes agendarte para nuestra próxima reunión mensual el&nbsp;
         <a href={{nextMeetup.link}} rel="noreferrer noopener" target="_blank">
-          {{moment-format nextMeetup.when 'dddd DD MMMM HH:mm'}} en {{nextMeetup.where}}
+          <span class="cap">{{moment-format nextMeetup.when 'dddd D MMMM HH:mm'}}</span>
+          en {{nextMeetup.where}}
         </a>
       </p>
     {{/if}}
