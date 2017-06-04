@@ -6,10 +6,8 @@
       alt="{{participant.name}}"
       title="{{participant.name}}">
   {{/each}}
-  <div class="new-rsvp">
-    <a href="http://meetup.com/ember-montevideo/">
-      <i class="fa fa-user-plus" aria-hidden="true"></i>
-      <span>SUMATE</span>
-    </a>
+  <div class="new-rsvp" {{action "join"}}>
+    <i class="fa fa-user-plus" aria-hidden="true"></i>
+    <span>SUMATE</span>
   </div>
 {{/if}}

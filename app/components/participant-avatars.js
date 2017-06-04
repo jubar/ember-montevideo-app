@@ -5,6 +5,7 @@ const { Component, inject: { service }, isNone, computed } = Ember;
 
 export default Component.extend({
   meetup: service(),
+  metrics: service(),
   classNames: ['participants'],
   participants: computed(function() {
     return [];
@@ -34,5 +35,16 @@ export default Component.extend({
     } finally {
       this.set('isLoading', false);
     }
-  }).on('init')
+  }).on('init'),
+
+  actions: {
+    join() {
+      this.get('metrics').trackEvent({
+        category: 'join',
+        action: 'footer-join'
+      });
+
+      window.location.assign('http://meetup.com/ember-montevideo/');
+    }
+  }
 });
