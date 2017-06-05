@@ -1,17 +1,24 @@
 .participants {
-  img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    margin: 0 10px 10px 0px;
-    border: 3px solid rgba(255,255,255,.1);
-    filter: grayscale(100%);
-    transition: all .2s;
+  display: flex;
+  flex-wrap: wrap;
 
-    &:hover {
-      filter: grayscale(0%);
-      border: 3px solid $primary-color-light;
-      transition: all .4s;
+  > div {
+    display: inline-block;
+    margin: 0 10px 10px 0px;
+
+    img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border: 3px solid rgba(255,255,255,.1);
+      filter: grayscale(100%);
+      transition: all .2s;
+
+      &:hover {
+        filter: grayscale(0%);
+        border: 3px solid $primary-color-light;
+        transition: all .4s;
+      }
     }
   }
 
@@ -19,7 +26,6 @@
     background-color: $primary-color;
     width: 80px;
     height: 80px;
-    margin: 0 10px 10px 0px;
     text-align: center;
     display: inline-block;
     vertical-align: middle;
