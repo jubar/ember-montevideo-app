@@ -6,6 +6,10 @@ module.exports = function(defaults) {
     // Add options here
     SRI: {
       enabled: false
+    },
+
+    'ember-cli-tooltipster': {
+      importTooltipsterBorderless: true
     }
   });
 

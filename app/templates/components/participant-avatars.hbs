@@ -2,9 +2,14 @@
   <p>Obteniendo participantes del próximo meetup...</p>
 {{else}}
   {{#each participants as |participant|}}
-    <img src="{{participant.imageUrl}}"
-      alt="{{participant.name}}"
-      title="{{participant.name}}">
+    {{#tool-tipster
+      title=participant.name
+      theme="tooltipster-borderless"
+      animation="grow"
+      side="top"
+    }}
+      <img src="{{participant.imageUrl}}" alt="{{participant.name}}">
+    {{/tool-tipster}}
   {{/each}}
   <div class="new-rsvp">
     <a href="http://meetup.com/ember-montevideo/">
