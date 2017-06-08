@@ -38,8 +38,8 @@ module.exports = function(environment) {
       'default-src': "'none'",
       'font-src': "'self' fonts.gstatic.com",
       'style-src': "'self' fonts.googleapis.com",
-      'script-src': "'self' https://www.google-analytics.com/*",
-      'connect-src': "'self' https://www.google-analytics.com/*",
+      'script-src': "'self' https://www.google-analytics.com/",
+      'connect-src': "'self' https://www.google-analytics.com/",
       'img-src': "'self'",
       'media-src': "'self'"
     },
@@ -76,9 +76,9 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.rootURL = "/ember-montevideo-app/";
+    // ENV.rootURL = "/ember-montevideo-app/";
     ENV.locationType = 'hash';
-    // ENV.rootURL = "/"; // URL for js.uy
+    ENV.rootURL = "/"; // URL for js.uy
   }
 
   return ENV;

@@ -5,6 +5,7 @@ const { Component, computed, inject: { service } } = Ember;
 
 export default Component.extend({
   meetup: service(),
+  metrics: service(),
   classNames: ['meetup-menu-selector'],
 
   years: computed.alias('meetup.yearsMenu'),
@@ -22,6 +23,11 @@ export default Component.extend({
 
   actions: {
     changeMenu(year) {
+      this.get('metrics').trackEvent({
+        category: 'change-year-menu',
+        action: 'click-dropdown',
+        value: year
+      });
       this.get('retrieveMeetupsTask').perform(year);
     }
   }
