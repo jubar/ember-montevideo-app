@@ -13,8 +13,16 @@
     <link rel="stylesheet" href="{{rootURL}}assets/ember-montevideo-website.css">
 
     {{content-for "head-footer"}}
+    <style>
+      html,body {min-height: 100%}
+      .loading {
+        background-position: top;
+        background-image: linear-gradient(to bottom, #e24c32 0, #e24c32 55px, #2b2b2b 55px, #2b2b2b 455px, #fff 455px, #fff 100%);
+        background-color: #fff;
+      }
+    </style>
   </head>
-  <body>
+  <body class="loading">
     {{content-for "body"}}
 
     <script src="{{rootURL}}assets/vendor.js"></script>
