@@ -31,6 +31,6 @@ script:
 
 after_success:
   - |
-       $(npm bin)/set-up-ssh --key "$encrypted_0932a870370d_key" \
-                             --iv "$encrypted_0932a870370d_iv" \
-                             --path-encrypted-key ".travis/github_deploy_key.enc"
+    $(npm bin)/set-up-ssh --key "$encrypted_0932a870370d_key" --iv "$encrypted_0932a870370d_iv" --path-encrypted-key ".travis/github_deploy_key.enc"
+  - |
+    if [ "$TRAVIS_BRANCH" = "master" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then ember deploy production; fi
