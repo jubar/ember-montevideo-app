@@ -1,51 +1,24 @@
-# ember-montevideo-website
+# ember-montevideo-app
+[![Build Status](https://travis-ci.org/jubar/ember-montevideo-app.svg?branch=master)](https://travis-ci.org/jubar/ember-montevideo-app)
 
-This is an experimental version of the Ember Montevideo meetup website. 
+Source code of the Ember Montevideo website. http://ember.js.uy/. This is an [Ember.js](https://www.emberjs.com/) application.
 
-## Prerequisites
+## Development
 
-You will need the following things properly installed on your computer.
-
-* [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/) (with NPM)
-* [Bower](https://bower.io/)
-* [Ember CLI](https://ember-cli.com/)
-* [PhantomJS](http://phantomjs.org/)
-
-## Installation
-
-* `git clone <repository-url>` this repository
-* `cd ember-montevideo-website`
-* `npm install`
-* `bower install`
-
-## Running / Development
-
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-
-### Code Generators
-
-Make use of the many generators for code, try `ember help generate` for more details
-
-### Running Tests
-
-* `ember test`
-* `ember test --server`
-
-### Building
-
-* `ember build` (development)
-* `ember build --environment production` (production)
+```
+$ git clone https://github.com/jubar/ember-montevideo-app.git
+$ cd ember-montevideo-app
+$ yarn install
+```
 
 ### Deploying
 
-Specify what it takes to deploy your app.
+```
+$ ember deploy production
+```
 
-## Further Reading / Useful Links
+## License
 
-* [ember.js](http://emberjs.com/)
-* [ember-cli](https://ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+ember-montevideo-app is licensed under the MIT license.
+
+See [LICENSE](./LICENSE) for the full license text.
