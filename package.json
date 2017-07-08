@@ -51,8 +51,7 @@
     "ember-source": "~2.13.0",
     "ember-tinycon": "0.1.0",
     "ember-toggle-helper": "0.1.1",
-    "ember-web-app": "1.2.0",
-    "ember-web-app-rename": "1.0.0",
+    "ember-web-app": "^2.0.0",
     "ember-welcome-page": "^3.0.0",
     "ember-wormhole": "0.5.1",
     "loader.js": "^4.2.3"
