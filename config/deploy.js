@@ -10,8 +10,8 @@ module.exports = function(deployTarget) {
     ENV.build.environment = 'production';
     // configure other plugins for production deploy target here
     ENV.git = {
-      repo: 'git@github.com:jubar/ember-montevideo-app.git',
-      branch: 'gh-pages',
+      repo: 'git@github.com:ember-montevideo/ember-montevideo.github.io.git',
+      branch: 'master',
       worktreePath: '/tmp/deploy'
     };
   }
