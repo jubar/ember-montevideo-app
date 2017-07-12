@@ -5,6 +5,10 @@ node_js:
 
 sudo: false
 
+env:
+  global:
+    - secure: "oCCmA7JO9lMRS0zAGIEcydqNvfCCB3IJmS+NOEnjyb3UFS21bsne/CVOc6D+bkrNDPbpTJmy4M4wWuzugz6oYkJNAFAH83oNx+WdHBhyn18aOoc51LaPGHUGM9vSNG6B6ZWWH6dbW5qEyMob3bc4sjaKHhffJ7+iruYmn9+zB5kF5dkvnXUd85cwAwxRyW3ZyyFZy1iX4HKVu/ZqA5STcB9hqj/cZ9z9MXcmWp7VegoHMgRHcwj1zrz+c2Sy1N1+PkFuD0UaUlXWnSuMYmSmN0RMsi9ustcwM2tfCtSwuw7DOE557bFeVbC7wvjC8TReHABIT5TgQQ8bqFFfO2h2KsjBZ8DzL934gZvktxEfrKMNZCmrxGn/YkYeb9hrieZuAqM2TKsUnWLsJgSl8iVBwzoRNHy6XTvgRhzXNSf6s9IuH1ELka2pyf3nVthdvDfrDz1HGPjr7NetK8r27SetNGq++FCRCtRCCh/AfhfA0+8bIfxPFYPSB7zY4mtgczqAR1i6kc9A1h9aQBThmAVS8TQZDY4fiZNBiOK9dJi0mvY2IYoMMAgErD3y/rxfNfhSb1jeDls8jLNiEmU3wa0iI+GXV6J4qQd5/axw83kiY7e1/E9O+Y8VcJXbAqvRmmGrpdxPuBamw/6GgPELi0v3j3H0DECwHoSQzqA8L6PABOc="
+
 cache:
   directories:
     - $HOME/.cache # includes bowers cache
@@ -24,3 +28,9 @@ install:
 
 script:
   - yarn test
+
+after_success:
+  - |
+       $(npm bin)/set-up-ssh --key "$encrypted_0932a870370d_key" \
+                             --iv "$encrypted_0932a870370d_iv" \
+                             --path-encrypted-key ".travis/github_deploy_key.enc"
