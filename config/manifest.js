@@ -18,7 +18,7 @@ module.exports = function(/* environment, appConfig */) {
              sizes: size,
              type: "image/png"
            })).concat(favicons.map((size) => ({
-             src: `assets/favicon-${size}.png`,
+             src: `assets/favicon/favicon-${size}.png`,
              sizes: size,
              type: "image/png",
              targets: ["favicon"]
