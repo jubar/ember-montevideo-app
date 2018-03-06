@@ -31,6 +31,10 @@
 
 .ember-burger-menu .bm-outlet .bm-content {
   background-color: #fffbfb;
+  // We need to set overflow to scroll to support "momentum" scroll on IOS
+  // https://css-tricks.com/snippets/css/momentum-scrolling-on-ios-overflow-elements/
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .sidebar-menu-logo {
